@@ -1,4 +1,4 @@
-// *** Map_v0.2
+// *** Map_v0.25
 #include <iostream>
 #include <string>
 #include <map>
@@ -39,6 +39,10 @@ map<int, list<object>> Objects;
 return 0;
 }
 */
+
+void AddData(int _Key, int _Value);
+
+map<int, int > Numbers;
 
 int main(void)
 {
@@ -169,9 +173,8 @@ int main(void)
 	*/
 
 	// map 사용
-	map<int, int > Numbers;
+	// map<int, int > Numbers;
 
-	
 	Numbers[0] = 0;
 	Numbers[1] = 10;
 	// Numbers[2] = 20;
@@ -185,10 +188,21 @@ int main(void)
 	// 런타임 중에는 make_pair()를 사용함으로써 기존데이터를 지켜주는게 중요함
 	Numbers.insert( make_pair(4, 40) );
 	
+	AddData(2,200);
+
+	// 배열로 출력
+	/*
+	for (int i = 0; i < 5; ++i)
+	{
+		cout << Numbers[i] << endl;
+	}
+	*/
+
 	// *** make_pair 은 기존 데이터를 보호함
 	// Numbers.insert( make_pair(2, 200) );
 	
 	// ** 키 값을 찾아줌 
+	/*
 	map<int, int >::iterator iter = Numbers.find(2);
 
 	// ** 키 값이 존재하지 않을때는 Numbers.end()로 가기 때문에  if 문으로 넣어줌
@@ -201,12 +215,7 @@ int main(void)
 	// *** 키값이 2인 데이터가 있으면 변경
 	iter->second = 200;
 
-	// 배열로 출력
-	/*
-	for (int i = 0; i < 5; ++i)
-	{
-		cout << Numbers[i] << endl;
-	}
+	// 모듈화 -> 반복되는 코딩을 줄이는것
 	*/
 
 	// 반복자로 출력
@@ -215,8 +224,20 @@ int main(void)
 		cout << iter->second << endl;
 	}
 
-	// 모듈화 -> 반복되는 코딩을 줄이는것
 	return 0;
+}
+
+
+void AddData(int _Key, int _Value)
+{
+	map<int, int >::iterator iter = Numbers.find(_Key);
+
+	if (iter == Numbers.end())
+	{
+		Numbers.insert(make_pair(_Key, _Value));
+	}
+	else
+		iter->second = _Value;
 }
 
 
@@ -237,3 +258,5 @@ int main(void)
 // 불시점검에 없으면 부정출결 사유에 들어갈수있음 -> 받은금액의 3배를 돌려줘야함
 // if 화장실갈때 말하고 가는게 좋음
 // 알잘딱하자
+
+// C++로 진행 // 아스키 아트로 만드는 포트폴리오
