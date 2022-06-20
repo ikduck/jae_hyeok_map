@@ -159,10 +159,27 @@ struct Object
 
 struct Player : public Object
 {
-
 	Player() {};
-	// 복사 생성자(Object)를 호출 -> 호출한 복사 생성자에서 초기화해줌
 	Player(const Trasnform& _Info) : Object(_Info) {};
+};
+
+struct Boss : public Object
+{
+	Boss() {};
+	Boss(const Trasnform& _Info) : Object(_Info) {};
+};
+
+struct Enemy : public Object
+{
+	Enemy() {};
+	Enemy(const Trasnform& _Info) : Object(_Info) {};
+};
+
+
+struct Bullet : public Object
+{
+	Bullet() {};
+	Bullet(const Trasnform& _Info) : Object(_Info) {};
 };
 
 map<string, list<Object*>> Objects;
@@ -171,8 +188,6 @@ void Initialize();
 
 // void AddData(int _Key, int _Value);
 void AddObject(string _Key, Object* _Object);
-
-
 
 int main(void)
 {
@@ -330,20 +345,59 @@ int main(void)
 	Info.Position.x = 10;
 	Info.Position.y = 20;
 	Info.Position.z = 30;
-
+	
 	AddObject("Player", new Player(Info));
+	AddObject("Player", new Player(Info));
+	AddObject("Player", new Player(Info));
+	
+	Info.Position.x = 100;
+	Info.Position.y = 200;
+	Info.Position.z = 300;
+	
+	AddObject("Enemy", new Enemy(Info));
+	AddObject("Enemy", new Enemy(Info));
+	
+	Info.Position.x = 1000;
+	Info.Position.y = 2000;
+	Info.Position.z = 3000;
+	
+	AddObject("Bullet", new Bullet(Info));
+	AddObject("Bullet", new Bullet(Info));
+	AddObject("Bullet", new Bullet(Info));
+	
+	Info.Position.x = 10000;
+	Info.Position.y = 20000;
+	Info.Position.z = 30000;
+	
+	AddObject("Boss", new Boss(Info));
+	AddObject("Boss", new Boss(Info));
+	AddObject("Boss", new Boss(Info));
 
-
-	// cout << Objects["Player"]->Info.Position.x << endl;
-	// cout << Objects["Player"]->Info.Position.y << endl;
-	// cout << Objects["Player"]->Info.Position.z << endl;
+	// 출력 1
+	/*
+	cout << Objects["Player"]->Info.Position.x << endl;
+	cout << Objects["Player"]->Info.Position.y << endl;
+	cout << Objects["Player"]->Info.Position.z << endl;
 
 	for (list < Object*>::iterator iter = Objects.begin()->second.begin() ; iter != Objects.begin()->second.end(); ++iter)
 	{
-		cout << (*iter)->Info.Position.x << endl;
-		cout << (*iter)->Info.Position.y << endl;
-		cout << (*iter)->Info.Position.z << endl;
+			cout << (*iter)->Info.Position.x << endl;
+			cout << (*iter)->Info.Position.y << endl;
+			cout << (*iter)->Info.Position.z << endl;
 	}
+	*/
+
+	for (map<string, list<Object*>>::iterator iter = Objects.begin(); iter != Objects.end(); ++iter)
+	{
+		cout << "[" << iter->first << "]" << endl;
+		for (auto iter2 = iter->second.begin(); iter2 != iter->second.end(); ++iter2)
+		{
+			cout << (*iter2)->Info.Position.x << ", " << (*iter2)->Info.Position.y << ", "
+				<< (*iter2)->Info.Position.z << endl;
+		}
+		cout << endl;
+	}
+
 	return 0;
 }
 
@@ -427,9 +481,9 @@ void AddObject(string _Key, Object* _Object)
 	push_back으로 넣어주면 노드 안에 들어감
 
 	쇼핑몰처럼 상단에 띄우고 싶으면 list로 제일 앞에 넣어주면됨 구조상 다름
-*/
+*/ 
 
-// 수업 전달상황
+// 수업 전달상황 2022/06/17
 /*
 	수업시간 절반 이상 넘어가면 결석처리
 	불시점검에 없으면 부정출결 사유에 들어갈수있음 -> 받은금액의 3배를 돌려줘야함
@@ -439,7 +493,38 @@ void AddObject(string _Key, Object* _Object)
 	7월 25일 이후로 3시 ~ 6시 교육으로 바뀜
 	
 	C++로 진행 // 아스키 아트로 만드는 포트폴리오
-*/
+*/ 
 
+// 수업 내용 2022/06/20
+/*
+	구인구직 실력이없으면 못함, 자신만의 방법을 고집하면안됨 
+	코딩테스트? 지금도 느껴지긴해
+	
+	포트폴리오 -> 학원 홍보용으로 사용할수 있음.
+	결석 조퇴 지각 사유 꼭 말해줘야함
+	쳐내질수도있음 조심해야함 전략적으로 가야함
+	자료구조
+	
+	c++ 의 개념 깨부하자! 
+	API는 하지않음 -> 다이렉트(이미 끝물), mfc(안씀)를 하겟다 -> 의미없다!
+	다이렉트 -> 기본 3D
 
+	C++ stl c#을 이용한 유니티 2d + 3d 
 
+	선생님이 주신 함수 그대로 사용하자
+	함수 생성하는게 아니라 사용이라도 잘하자
+
+	함수를 잘 만드는게 아니라 함수를 얼마나 잘 쓰는지가 더 중요함
+
+	공간의 활용 -> 테트리스 
+
+	횡스크롤 2d, 종스크롤 2d ,3d 에셋구매 돈 모아놓기 (환률)
+
+	이력서 코딩테스트 
+
+	2023 3월 이후로 끝날수도 있음 9개월 or 10개월 
+	기초 초반 교육이 굉장히 중요함
+
+	책 추천 할게 별로없음
+	영어공부 꾸준하게 하기
+*/ 
